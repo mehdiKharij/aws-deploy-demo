@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'alibouali/aws-demo:1.0' // Image Docker mise à jour
-        EC2_IP = '13.60.196.67' // IP publique de votre instance EC2
+        EC2_IP = '13.60.167.33' // IP publique de votre instance EC2
         KEY_PATH = 'C:/users/user/key-spring.pem' // Chemin exact vers votre clé privée
         USER = 'ec2-user' // Utilisateur par défaut pour Amazon Linux
     }
