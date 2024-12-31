@@ -14,17 +14,17 @@ pipeline {
                 script {
                     echo 'Deploying the Docker container to the EC2 instance...'
 
-                    // Connexion SSH et déploiement du conteneur Docker
-                    sh """
+                    // Windows-specific SSH commands (using 'bat' instead of 'sh')
+                    bat """
                         ssh -i "${KEY_PATH}" -o StrictHostKeyChecking=no ${USER}@${EC2_IP} << EOF
-                        # Arrêter et supprimer tout conteneur existant nommé deployspring
+                        # Stop and remove any existing container named deployspring
                         docker stop deployspring || true
                         docker rm deployspring || true
 
-                        # Pull de la dernière image depuis Docker Hub
+                        # Pull the latest image from Docker Hub
                         docker pull ${DOCKER_IMAGE}
 
-                        # Lancer un nouveau conteneur
+                        # Run a new container
                         docker run -d --name deployspring -p 80:8080 ${DOCKER_IMAGE}
                         EOF
                     """
