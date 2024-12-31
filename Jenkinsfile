@@ -16,7 +16,7 @@ pipeline {
 
                     // Windows-specific SSH commands (using 'bat' instead of 'sh')
                     bat """
-                        ssh -i "${KEY_PATH}" ${USER}@${EC2_IP} 
+                        ssh -i "${KEY_PATH}" -T ${USER}@${EC2_IP} 
                         # Stop and remove any existing container named deployspring
                         docker stop deployspring || true
                         docker rm deployspring || true
