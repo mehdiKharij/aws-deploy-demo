@@ -1,7 +1,7 @@
- pipeline {
+pipeline {
     agent any
 
-  stages {
+    stages {
         stage('Checkout') {
             steps {
                 echo 'Cloning the Git repository...'
@@ -17,6 +17,5 @@
                 echo 'Maven build successful!'
             }
         }
-
-  
-}
+    } // Fin des stages
+} // Fin du pipeline
