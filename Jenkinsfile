@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Starting Maven build...'
-                bat 'mvn clean install'
+                bat '"C:\\Program Files\\apache-maven-3.9.9\\bin\\mvn" clean install'
                 echo 'Maven build successful!'
             }
         }
