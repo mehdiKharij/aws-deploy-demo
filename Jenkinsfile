@@ -16,17 +16,10 @@ pipeline {
 
                     // Windows-specific SSH commands (using 'bat' instead of 'sh')
                     bat """
-                        ssh -i "${KEY_PATH}" -T  ${USER}@${EC2_IP} << EOF
-                        # Stop and remove any existing container named deployspring
-                        docker stop deployspring || true
-                        docker rm deployspring || true
-
-                        # Pull the latest image from Docker Hub
-                        docker pull ${DOCKER_IMAGE}
-
-                        # Run a new container
-                        docker run -d --name deployspring -p 80:8080 ${DOCKER_IMAGE}
-                        EOF
+                        ssh -i "${KEY_PATH}" -T -o StrictHostKeyChecking=no ${USER}@${EC2_IP} "docker stop deployspring || true"
+                        ssh -i "${KEY_PATH}" -T -o StrictHostKeyChecking=no ${USER}@${EC2_IP} "docker rm deployspring || true"
+                        ssh -i "${KEY_PATH}" -T -o StrictHostKeyChecking=no ${USER}@${EC2_IP} "docker pull ${DOCKER_IMAGE}"
+                        ssh -i "${KEY_PATH}" -T -o StrictHostKeyChecking=no ${USER}@${EC2_IP} "docker run -d --name deployspring -p 80:8080 ${DOCKER_IMAGE}"
                     """
                 }
             }
