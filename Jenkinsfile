@@ -1,27 +1,22 @@
  pipeline {
     agent any
 
-    stages {
+  stages {
         stage('Checkout') {
             steps {
-                // Clone le dépôt Git
+                echo 'Cloning the Git repository...'
                 git url: 'https://github.com/mehdiKharij/aws-deploy-demo.git', branch: 'main'
+                echo 'Git checkout successful! Repository cloned.'
             }
         }
 
-        s
-
-        stage('Build Backend') {
+        stage('Build') {
             steps {
-                dir('spring-boot-server') {
-                    script {
-                        // Utiliser Maven ou Gradle pour le build backend
-                        sh './mvnw clean install' // Si Maven Wrapper est utilisé
-                    }
-                }
+                echo 'Starting Maven build...'
+                bat '"C:\\Program Files\\apache-maven-3.9.9\\bin\\mvn" clean install'
+                echo 'Maven build successful!'
             }
         }
-    }
 
   
 }
